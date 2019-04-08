@@ -1,0 +1,56 @@
+{
+  "name": "ssb-patchql-client",
+  "version": "1.0.0",
+  "description": "An example app that has feeds / threads / posts etc.",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo . -d --serve bundle.js --live -- -t babelify -g aliasify ",
+    "start-prod": "budo . -d --serve bundle.js --live -- -t babelify -g aliasify -p tinyify",
+    "build": "browserify . -o bundle.js -p tinyify -g aliasify",
+    "test": "browserify test/index.js | node | tap-spec",
+    "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
+    "push": "gh-pages -d dist",
+    "deploy": "npm run build && npm run dist && npm run push"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "aliasify"
+    ]
+  },
+  "aliasify": {
+    "aliases": {
+      "react": "preact-compat",
+      "react-dom": "preact-compat"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pietgeursen/ssb-patchql-client"
+  },
+  "author": "pietgeursen",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/pietgeursen/ssb-patchql-client/issues"
+  },
+  "homepage": "https://github.com/pietgeursen/ssb-patchql-client",
+  "dependencies": {},
+  "devDependencies": {
+    "aliasify": "^2.1.0",
+    "apollo-boost": "^0.3.1",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^16.2.3",
+    "budo": "^11.6.1",
+    "gh-pages": "^0.11.0",
+    "graphql": "^14.2.1",
+    "preact": "^8.4.2",
+    "preact-compat": "^3.18.4",
+    "react-apollo": "^2.5.4",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1",
+    "tinyify": "^2.5.0",
+    "watchify": "^3.7.0"
+  }
+}
