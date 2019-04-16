@@ -1,4 +1,4 @@
-import {h} from 'preact'
+import React from 'react'
 import ApolloClient from "apollo-boost"
 import {ApolloProvider, Query} from "react-apollo"
 import gql from "graphql-tag";
@@ -7,57 +7,28 @@ const client = new ApolloClient({
   uri: "http://localhost:8080/graphql",
 });
 
-const query = gql`
-  {
-    feed {
-      threadsConnection(next: 4) {
-        pageInfo {
-          endCursor
-          hasNextPage
-        }
-        threads {
-          root {
-            id
-            author {
-              name
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-function Thread(props) {
-
-  const {author, id} = props.root
-
-  return h('li', {key: id}, [`Author: ${author.name}, id: ${id}`])
-
-}
-
-//TODO: this needs to be a stateful component.
-function Feed(props) {
-  return h(Query, {query}, [
-    ({loading, error, data}) => {
-      console.log(data);
-      const { pageInfo, threads } = !loading && data.feed.threadsConnection
-      return h('div', {}, [
-        `isLoading: ${loading}`,
-        !loading && h('ul', {}, threads.map(Thread))
-      ])
-    }
-  ])
-}
-
-
 function App(props) {
-  return h(ApolloProvider, {client}, [
-    h('h1', {}, [
-      `Welcome 2 ${props.name}`,
-      h(Feed)
-    ])
-  ])
+  return(
+  <ApolloProvider client={client}>
+    <div className="grid-y large-grid-frame">
+      <div className="cell large-auto large-cell-block-container">
+        <div className="grid-x">
+          <div id="sidebar" className="cell large-2 large-cell-block-y">
+          </div>
+          <div className="cell large-10 large-cell-block-y">
+            <div className="grid=x">
+              <div id="topbar" className="large-12">Topbar.....</div>
+              <div id="content-view" className="large-12">
+                <h2>My first Apollo app 🚀</h2>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ApolloProvider>
+  )
 }
 
 export default App

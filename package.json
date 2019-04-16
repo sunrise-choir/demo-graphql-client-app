@@ -4,9 +4,10 @@
   "description": "An example app that has feeds / threads / posts etc.",
   "main": "index.js",
   "scripts": {
-    "start": "budo . -d --serve bundle.js --live -- -t babelify -g aliasify ",
-    "start-prod": "budo . -d --serve bundle.js --live -- -t babelify -g aliasify -p tinyify",
-    "build": "browserify . -o bundle.js -p tinyify -g aliasify",
+    "start": "budo . -d --serve bundle.js --live -- -t babelify ",
+    "start-prod": "budo . -d --serve bundle.js --live -- -t babelify -p tinyify",
+    "build": "browserify . -o bundle.js -p tinyify",
+    "build-sass": "gulp sass",
     "test": "browserify test/index.js | node | tap-spec",
     "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
     "push": "gh-pages -d dist",
@@ -14,15 +15,8 @@
   },
   "browserify": {
     "transform": [
-      "babelify",
-      "aliasify"
+      "babelify"
     ]
-  },
-  "aliasify": {
-    "aliases": {
-      "react": "preact-compat",
-      "react-dom": "preact-compat"
-    }
   },
   "repository": {
     "type": "git",
@@ -39,16 +33,24 @@
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "aliasify": "^2.1.0",
     "apollo-boost": "^0.3.1",
+    "autoprefixer": "^9.1.5",
     "babelify": "^10.0.0",
+    "browser-sync": "^2.26.3",
     "browserify": "^16.2.3",
     "budo": "^11.6.1",
+    "foundation-sites": "^6.5.1",
     "gh-pages": "^0.11.0",
     "graphql": "^14.2.1",
-    "preact": "^8.4.2",
-    "preact-compat": "^3.18.4",
+    "gulp": "^4.0.0",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.1",
+    "motion-ui": "~2.0.0",
+    "react": "^16.8.6",
     "react-apollo": "^2.5.4",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
     "tinyify": "^2.5.0",
