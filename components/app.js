@@ -5,14 +5,11 @@ import {ApolloProvider, Query} from "react-apollo"
 import gql from "graphql-tag";
 
 import NavLinkListItem from './navLinkListItem'
+import PublicFeed from './publicFeed'
 
 const client = new ApolloClient({
   uri: "http://localhost:8080/graphql",
 });
-
-function Public() {
-  return <h2>Public</h2>;
-}
 
 function Profile() {
   return <h2>Profile</h2>;
@@ -32,6 +29,10 @@ function Participating() {
 
 
 function App(props) {
+  let scrollParentRef
+  const getScrollParent = () => {
+    return scrollParentRef
+  }
   return(
   <ApolloProvider client={client}>
     <Router>
@@ -48,7 +49,7 @@ function App(props) {
               </ul>
             </nav>
             </div>
-            <div className="cell large-10 large-cell-block-y">
+            <div className="cell large-10 large-cell-block-y" ref = {ref => {scrollParentRef = ref}}>
               <div className="grid=x">
                 <div id="topbar" className="top-bar">
                   <div className="top-bar-left">
@@ -66,7 +67,7 @@ function App(props) {
                 </div>
                 <div id="content-view" className="large-12">
                   <Switch>
-                    <Route path="/public" exact component={Public} />
+                    <Route path="/public" exact component={() => <PublicFeed getScrollParent={getScrollParent}/> }  />
                     <Route path="/private/" component={Private} />
                     <Route path="/participating/" component={Participating} />
                     <Route path="/profile" component={Profile} />

@@ -51,6 +51,7 @@
     "react": "^16.8.6",
     "react-apollo": "^2.5.4",
     "react-dom": "^16.8.6",
+    "react-infinite-scroller": "^1.2.4",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "tap-spec": "^4.1.1",
