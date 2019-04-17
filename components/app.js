@@ -37,6 +37,21 @@ function App(props) {
   <ApolloProvider client={client}>
     <Router>
       <div className="grid-y large-grid-frame">
+
+        <div id="topbar" className="top-bar">
+          <div className="top-bar-left">
+            <ul className="menu">
+              <NavLinkListItem to="/mentions">Mentions</NavLinkListItem>
+              <NavLinkListItem to="/profile">Profile</NavLinkListItem>
+            </ul>
+          </div>
+          <div className="top-bar-right">
+            <ul className="menu">
+              <li><input type="search" placeholder="Search: eg Sunrise Choir AND Mikey NOT singing"/></li>
+              <li><button type="button" className="button">Search</button></li>
+            </ul>
+          </div>
+        </div>
         <div className="cell large-auto large-cell-block-container">
           <div className="grid-x">
             <div id="sidebar" className="cell large-2 large-cell-block-y">
@@ -50,21 +65,7 @@ function App(props) {
             </nav>
             </div>
             <div className="cell large-10 large-cell-block-y" ref = {ref => {scrollParentRef = ref}}>
-              <div className="grid=x">
-                <div id="topbar" className="top-bar">
-                  <div className="top-bar-left">
-                    <ul className="menu">
-                      <NavLinkListItem to="/mentions">Mentions</NavLinkListItem>
-                      <NavLinkListItem to="/profile">Profile</NavLinkListItem>
-                    </ul>
-                  </div>
-                  <div className="top-bar-right">
-                    <ul className="menu">
-                      <li><input type="search" placeholder="Search: eg Sunrise Choir AND Mikey NOT singing"/></li>
-                      <li><button type="button" className="button">Search</button></li>
-                    </ul>
-                  </div>
-                </div>
+              <div className="grid-x" >
                 <div id="content-view" className="large-12">
                   <Switch>
                     <Route path="/public" exact component={() => <PublicFeed getScrollParent={getScrollParent}/> }  />
