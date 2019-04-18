@@ -1,46 +1,12 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 import {ApolloConsumer, Query} from "react-apollo"
 import gql from "graphql-tag";
 import InfiniteScroll from 'react-infinite-scroller'
 import ReactMarkdown from 'react-markdown'
-import ref from 'ssb-ref'
-import regexEmoji from 'regex-emoji'
-import matchAll from 'match-all'
 
-import emojis from 'emoji-named-characters'
+import blobLinkToUrl from '../lib/blobLinkToUrl'
+import replaceEmojiWithUnicode from '../lib/replaceEmojiWithUnicode'
 
-
-const emojiSupport = text => text.value.replace(regexEmoji(), name => {
-  var matches = matchAll(name, regexEmoji())
-  if(matches.length === 0)
-    return name
-
-  var match = matches.next()
-
-  return emojis[match] && emojis[match].character
-})
-
-const transformImageUri = (uri) => {
-
-  if (ref.isBlob(uri)) {
-    var prefix = `http://localhost:8989/blobs/get`
-    var link = ref.parseLink(uri)
-    link =  linkToUrl(prefix, link)
-    return link
-  }
-  return uri;
-}
-
-function linkToUrl (prefix, link) {
-  if (link == null || !ref.isBlob(link.link)) return null
-  var url = `${prefix}/${link.link}`
-  if (typeof link.query === 'object') {
-    url += '?' + Object.keys(link.query)
-      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(link.query[key])}`)
-      .join('&')
-  }
-  return url
-}
 
 const query = gql`
   query($next: Int, $after: String){
@@ -55,6 +21,8 @@ const query = gql`
           text
           author {
             id
+            name
+            imageLink
           }
         }
       }
@@ -62,45 +30,38 @@ const query = gql`
   }
 `
 
-const authorQuery = gql`
-  query($id: String!){
-    author(id: $id) {
-      name
-    }
-  }
-`
-function AuthorThumbnail({author}) {
-  return (
-    <Query query={authorQuery} variables={{id: author.id}} >
-    {({loading, data}) => {
-      if(loading) return <div>Loading...</div>
-
-      const author = data.author
-      return(
-        <div>
-          <div>
-            {author.name}
-          </div>
+class AuthorThumbnail extends PureComponent {
+  render(){
+    const {author} = this.props
+    return(
+      <div className="grid-x">
+        <div className="cell small-4">
+          <img src={blobLinkToUrl(author.imageLink)}/>
         </div>
-      )
-    }}
-    </Query>
-  )
+        <div className="cell">
+          {author.name}
+        </div>
+      </div>
+    )
+  }
 }
 
-function Thread({thread}) {
-  return (
-    <div className="grid-x">
-      <div className="cell small-2">
-        <AuthorThumbnail author={thread.root.author} />
+class Thread extends PureComponent{
+  render(){
+    const {thread} = this.props
+    return(
+      <div className="grid-x">
+        <div className="cell small-2">
+          <AuthorThumbnail author={thread.root.author} />
+        </div>
+        <div className="cell small-10">
+          <ReactMarkdown source={thread.root.text} renderers={{text: replaceEmojiWithUnicode}} transformImageUri={blobLinkToUrl}/>
+        </div>
+        <div>
+        </div>
       </div>
-      <div className="cell small-10">
-        <ReactMarkdown source={thread.root.text} renderers={{text: emojiSupport}} transformImageUri={transformImageUri}/>
-      </div>
-      <div>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 function Threads({threads}) {
@@ -132,21 +93,18 @@ class PublicFeed extends Component{
           return(
             <InfiniteScroll
             pageStart={0}
+            threshold={1000}
             loadMore={ (page)=>{
               const variables = {
                 after: this.endCursor,
-                next: 20
+                next: 1 //Oddly, loading only one at a time means react is less laggy because it has less work to do for each setState call.
               }
               client.query({query, variables})
                 .then(({data}) => {
                   const {threads:{nodes, pageInfo:{endCursor}}} = data
 
                   this.endCursor = endCursor
-                  const threads = this.state.threads
-
-                  nodes.forEach(node => threads.push(node))
-
-                  this.setState({threads})
+                  this.setState((prevState)=> ({threads: prevState.threads.concat(nodes)}))
                 })
             }}
             hasMore={true || false}
