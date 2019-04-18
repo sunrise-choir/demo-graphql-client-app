@@ -44,7 +44,7 @@ function App (props) {
             </div>
             <div className='top-bar-right'>
               <ul className='menu'>
-                <li><input type='search' placeholder='Search: eg Sunrise Choir AND Mikey NOT singing' /></li>
+                <li><input type='search' size={50} placeholder='Search: eg Sunrise Choir AND Mikey NOT singing' /></li>
                 <li><button type='button' className='button'>Search</button></li>
               </ul>
             </div>
