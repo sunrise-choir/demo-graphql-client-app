@@ -1,19 +1,19 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 const query = gql`
   query(
-    $next: Int, 
-    $after: String, 
-    $rootsAuthoredBy: [String!], 
-    $rootsAuthoredBySomeoneFollowedBy: [String!], 
-    $hasRepliesAuthoredBy: [String!], 
+    $next: Int,
+    $after: String,
+    $rootsAuthoredBy: [String!],
+    $rootsAuthoredBySomeoneFollowedBy: [String!],
+    $hasRepliesAuthoredBy: [String!],
     $hasRepliesAuthoredBySomeoneFollowedBy: [String!],
     ){
 
     threads(
-      next: $next, 
-      after: $after, 
-      rootsAuthoredBy: $rootsAuthoredBy, 
+      next: $next,
+      after: $after,
+      rootsAuthoredBy: $rootsAuthoredBy,
       rootsAuthoredBySomeoneFollowedBy: $rootsAuthoredBySomeoneFollowedBy,
       hasRepliesAuthoredBy: $hasRepliesAuthoredBy,
       hasRepliesAuthoredBySomeoneFollowedBy: $hasRepliesAuthoredBySomeoneFollowedBy,
