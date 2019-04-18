@@ -25,6 +25,16 @@ function Private () {
   return <h2>Private</h2>
 }
 
+function Post ({ match: { params: { id } } }) {
+  // !!NOTE!! id has the % sigil removed to make it possible to uri encode the message id. It gets added back on here.
+  const messageId = `%${decodeURIComponent(id)}`
+  return <h2>Post for {messageId}</h2>
+}
+function Author ({ match: { params: { id } } }) {
+  const authorId = decodeURIComponent(id)
+  return <h2>Author {authorId}</h2>
+}
+
 function App (props) {
   let scrollParentRef
   const getScrollParent = () => {
@@ -73,6 +83,8 @@ function App (props) {
                       <Route path='/repliedToBySomeoneYouFollow/' component={() => <RepliedToBySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
                       <Route path='/profile' component={Profile} />
                       <Route path='/mentions' component={Mentions} />
+                      <Route path='/post/:id' component={Post} />
+                      <Route path='/author/:id' component={Author} />
                       <Redirect from='/' to='/bySomeoneYouFollow' />
                     </Switch>
                   </div>

@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
-import ReactMarkdown from 'react-markdown'
 
+import Markdown from './markdown'
 import AuthorThumbnail from './authorThumbnail'
-import replaceEmojiWithUnicode from '../lib/replaceEmojiWithUnicode'
-import blobLinkToUrl from '../lib/blobLinkToUrl'
 
 class ThreadSummary extends PureComponent {
   render () {
@@ -14,7 +12,7 @@ class ThreadSummary extends PureComponent {
           <AuthorThumbnail author={thread.root.author} />
         </div>
         <div className='cell small-10'>
-          <ReactMarkdown source={thread.root.text} renderers={{ text: replaceEmojiWithUnicode }} transformImageUri={blobLinkToUrl} />
+          <Markdown source={thread.root.text} />
         </div>
         <div />
       </div>
