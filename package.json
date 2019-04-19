@@ -50,6 +50,7 @@
     "gulp-sass": "^4.0.1",
     "match-all": "^1.2.5",
     "motion-ui": "~2.0.0",
+    "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.4",
     "react-dom": "^16.8.6",

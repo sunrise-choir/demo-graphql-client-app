@@ -32,6 +32,15 @@ const query = gql`
             imageLink
           }
         }
+        replies{
+          id
+          author{
+            id
+            name
+            imageLink
+          }
+        
+        }
       }
     }
   }
