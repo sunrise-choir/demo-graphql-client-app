@@ -15,6 +15,12 @@ npm install
 
 ## develop
 
+### Generate the latest graphql schema and fragments from the ssb-patchql graphql endpoint (assuming it's running at port 8080)
+
+```
+npm run graphql:rebuild
+```
+
 ```
 npm start
 ```

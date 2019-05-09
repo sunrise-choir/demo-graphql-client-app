@@ -11,7 +11,10 @@
     "test": "browserify test/index.js | node | tap-spec",
     "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
     "push": "gh-pages -d dist",
-    "deploy": "npm run build && npm run dist && npm run push"
+    "deploy": "npm run build && npm run dist && npm run push",
+    "graphql:get-schema": "graphql get-schema",
+    "graphql:generate-fragments": "graphql generate-fragments",
+    "graphql:rebuild": "npm run graphql:get-schema && npm run graphql:generate-fragments"
   },
   "browserify": {
     "transform": [
@@ -44,6 +47,8 @@
     "foundation-sites": "^6.5.1",
     "gh-pages": "^0.11.0",
     "graphql": "^14.2.1",
+    "graphql-cli": "^3.0.11",
+    "graphql-cli-generate-fragments": "^1.4.1",
     "gulp": "^4.0.0",
     "gulp-load-plugins": "^1.1.0",
     "gulp-postcss": "^8.0.0",
