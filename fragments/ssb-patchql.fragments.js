@@ -93,7 +93,6 @@ export const AuthorFragment = `fragment Author on Author {
 }
 `
 
-
 export const LikeConnectionNoNestingFragment = `fragment LikeConnectionNoNesting on LikeConnection {
   count
 }
@@ -154,7 +153,6 @@ export const AuthorNoNestingFragment = `fragment AuthorNoNesting on Author {
   id
 }
 `
-
 
 export const LikeConnectionDeepNestingFragment = `fragment LikeConnectionDeepNesting on LikeConnection {
   count
@@ -247,4 +245,3 @@ export const AuthorDeepNestingFragment = `fragment AuthorDeepNesting on Author {
   }
 }
 `
-

@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react'
 import { uniqBy } from 'ramda'
 
-import Markdown from './markdown'
-import AuthorThumbnail from './authorThumbnail'
+import Markdown from '../markdown/markdown'
+import AuthorThumbnail from '../authors/authorThumbnail'
 
 class ThreadSummary extends PureComponent {
   render () {
     const { thread, thread: { replies } } = this.props
     const uniqueReplies = uniqBy((reply) => reply.author.id)(replies)
-    console.log(uniqueReplies)
     return (
       <div className='grid-x'>
         <div className='cell small-2'>

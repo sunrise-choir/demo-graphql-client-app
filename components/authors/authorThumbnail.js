@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import blobLinkToUrl from '../lib/blobLinkToUrl'
+import blobLinkToUrl from '../../lib/blobLinkToUrl'
 
 class AuthorThumbnail extends PureComponent {
   render () {

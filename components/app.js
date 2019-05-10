@@ -3,11 +3,12 @@ import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 
-import NavLinkListItem from './navLinkListItem'
-import PublicFeed from './publicFeed'
-import ParticipatingFeed from './participatingFeed'
-import BySomeoneYouFollowFeed from './bySomeoneYouFollowFeed'
-import RepliedToBySomeoneYouFollowFeed from './repliedToBySomeoneYouFollowFeed'
+import NavLinkListItem from './router/navLinkListItem'
+import PublicFeed from './feeds/publicFeed'
+import MentionsFeed from './feeds/mentionsFeed'
+import ParticipatingFeed from './feeds/participatingFeed'
+import BySomeoneYouFollowFeed from './feeds/bySomeoneYouFollowFeed'
+import RepliedToBySomeoneYouFollowFeed from './feeds/repliedToBySomeoneYouFollowFeed'
 
 const client = new ApolloClient({
   uri: 'http://localhost:8080/graphql'
@@ -15,10 +16,6 @@ const client = new ApolloClient({
 
 function Profile () {
   return <h2>Profile</h2>
-}
-
-function Mentions () {
-  return <h2>Mentions</h2>
 }
 
 function Private () {
@@ -82,7 +79,7 @@ function App (props) {
                       <Route path='/bySomeoneYouFollow/' component={() => <BySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
                       <Route path='/repliedToBySomeoneYouFollow/' component={() => <RepliedToBySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
                       <Route path='/profile' component={Profile} />
-                      <Route path='/mentions' component={Mentions} />
+                      <Route path='/mentions/' component={() => <MentionsFeed getScrollParent={getScrollParent} />} />
                       <Route path='/post/:id' component={Post} />
                       <Route path='/author/:id' component={Author} />
                       <Redirect from='/' to='/bySomeoneYouFollow' />

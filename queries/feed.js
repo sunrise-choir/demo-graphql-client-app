@@ -2,21 +2,23 @@ import gql from 'graphql-tag'
 
 const query = gql`
   query(
-    $next: Int,
+    $first: Int,
     $after: String,
     $rootsAuthoredBy: [String!],
     $rootsAuthoredBySomeoneFollowedBy: [String!],
     $hasRepliesAuthoredBy: [String!],
     $hasRepliesAuthoredBySomeoneFollowedBy: [String!],
+    $mentionsAuthors: [String!],
     ){
 
     threads(
-      next: $next,
+      first: $first,
       after: $after,
       rootsAuthoredBy: $rootsAuthoredBy,
       rootsAuthoredBySomeoneFollowedBy: $rootsAuthoredBySomeoneFollowedBy,
       hasRepliesAuthoredBy: $hasRepliesAuthoredBy,
       hasRepliesAuthoredBySomeoneFollowedBy: $hasRepliesAuthoredBySomeoneFollowedBy,
+      mentionsAuthors: $mentionsAuthors,
       ) {
       pageInfo {
         endCursor
