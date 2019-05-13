@@ -9,6 +9,7 @@ const query = gql`
     $hasRepliesAuthoredBy: [String!],
     $hasRepliesAuthoredBySomeoneFollowedBy: [String!],
     $mentionsAuthors: [String!],
+    $privacy: Privacy
     ){
 
     threads(
@@ -19,6 +20,7 @@ const query = gql`
       hasRepliesAuthoredBy: $hasRepliesAuthoredBy,
       hasRepliesAuthoredBySomeoneFollowedBy: $hasRepliesAuthoredBySomeoneFollowedBy,
       mentionsAuthors: $mentionsAuthors,
+      privacy: $privacy
       ) {
       pageInfo {
         endCursor

@@ -7,6 +7,7 @@ import { Sticky, StickyContainer } from 'react-sticky'
 import { Link, Button, Menu, ResponsiveNavigation, Alignments, ButtonGroup } from 'react-foundation'
 import NavLinkListItem from './router/navLinkListItem'
 import PublicFeed from './feeds/publicFeed'
+import PrivateFeed from './feeds/privateFeed'
 import MentionsFeed from './feeds/mentionsFeed'
 import ParticipatingFeed from './feeds/participatingFeed'
 import BySomeoneYouFollowFeed from './feeds/bySomeoneYouFollowFeed'
@@ -68,7 +69,7 @@ function App (props) {
               <div id='content-view' className='cell auto'>
                 <Switch>
                   <Route path='/public' exact component={() => <PublicFeed getScrollParent={getScrollParent} />} />
-                  <Route path='/private/' component={Private} />
+                  <Route path='/private/' component={() => <PrivateFeed />} />
                   <Route path='/participating/' component={() => <ParticipatingFeed getScrollParent={getScrollParent} />} />
                   <Route path='/bySomeoneYouFollow/' component={() => <BySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
                   <Route path='/repliedToBySomeoneYouFollow/' component={() => <RepliedToBySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
