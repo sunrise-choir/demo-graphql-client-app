@@ -19,15 +19,17 @@ const query = gql`
         endCursor
         hasNextPage
       }
-      nodes {
-        id
-        text
-        author {
+      edges{
+        node {
           id
-          name
-          imageLink
+          text
+          author {
+            id
+            name
+            imageLink
+          }
+          rootKey
         }
-        rootKey
       }
     }
   }

@@ -2,7 +2,9 @@ import React from 'react'
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
+import { Sticky, StickyContainer } from 'react-sticky'
 
+import { Link, Button, Menu, ResponsiveNavigation, Alignments, ButtonGroup } from 'react-foundation'
 import NavLinkListItem from './router/navLinkListItem'
 import PublicFeed from './feeds/publicFeed'
 import MentionsFeed from './feeds/mentionsFeed'
@@ -38,60 +40,50 @@ function App (props) {
     return scrollParentRef
   }
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className='grid-y large-grid-frame'>
-          <div id='topbar' className='top-bar'>
-            <div className='top-bar-left'>
-              <ul className='menu'>
-                <NavLinkListItem to='/private'>Private</NavLinkListItem>
-                <NavLinkListItem to='/mentions'>Mentions</NavLinkListItem>
-                <NavLinkListItem to='/profile'>Profile</NavLinkListItem>
-              </ul>
-            </div>
-            <div className='top-bar-right'>
-              <ul className='menu'>
-                <li><input type='search' size={50} placeholder='Search: eg Sunrise Choir AND Mikey NOT singing' /></li>
-                <li><button type='button' className='button'>Search</button></li>
-              </ul>
-            </div>
-          </div>
-          <div className='cell large-auto large-cell-block-container'>
-            <div className='grid-x'>
-              <div id='sidebar' className='cell large-2 large-cell-block-y'>
-                <nav>
-                  <ul className='vertical menu'>
-                    <li className='menu-text'>Feeds</li>
-                    <NavLinkListItem to='/bySomeoneYouFollow'>By Someone You Follow</NavLinkListItem>
-                    <NavLinkListItem to='/repliedToBySomeoneYouFollow'>Replied To By Someone You Follow</NavLinkListItem>
-                    <NavLinkListItem to='/participating'>Participating</NavLinkListItem>
-                    <NavLinkListItem to='/public'>All</NavLinkListItem>
-                  </ul>
-                </nav>
-              </div>
-              <div className='cell large-10 large-cell-block-y' ref={ref => { scrollParentRef = ref }}>
-                <div className='grid-x' >
-                  <div id='content-view' className='large-12'>
-                    <Switch>
-                      <Route path='/public' exact component={() => <PublicFeed getScrollParent={getScrollParent} />} />
-                      <Route path='/private/' component={Private} />
-                      <Route path='/participating/' component={() => <ParticipatingFeed getScrollParent={getScrollParent} />} />
-                      <Route path='/bySomeoneYouFollow/' component={() => <BySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
-                      <Route path='/repliedToBySomeoneYouFollow/' component={() => <RepliedToBySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
-                      <Route path='/profile' component={Profile} />
-                      <Route path='/mentions/' component={() => <MentionsFeed getScrollParent={getScrollParent} />} />
-                      <Route path='/post/:id' component={Post} />
-                      <Route path='/author/:id' component={Author} />
-                      <Redirect from='/' to='/bySomeoneYouFollow' />
-                    </Switch>
-                  </div>
-                </div>
+    <StickyContainer>
+      <ApolloProvider client={client}>
+        <Router>
+          <Sticky>{({ style }) => {
+            return (
+              <ResponsiveNavigation style={style} >
+                <Menu isExpanded isVertical horizontalOnMedium>
+                  <NavLinkListItem to='/private'>Private</NavLinkListItem>
+                  <NavLinkListItem to='/mentions'>Mentions</NavLinkListItem>
+                  <NavLinkListItem to='/profile'>Profile</NavLinkListItem>
+                  <NavLinkListItem to='/bySomeoneYouFollow'>By Someone You Follow</NavLinkListItem>
+                  <NavLinkListItem to='/repliedToBySomeoneYouFollow'>Replied To By Someone You Follow</NavLinkListItem>
+                  <NavLinkListItem to='/participating'>Participating</NavLinkListItem>
+                  <NavLinkListItem to='/public'>All</NavLinkListItem>
+                </Menu>
+                <ul className='menu'>
+                  <li><input type='search' size={50} placeholder='Search: eg Sunrise Choir AND Mikey NOT singing' /></li>
+                  <li><button type='button' className='button'>Search</button></li>
+                </ul>
+              </ResponsiveNavigation>
+            )
+          }}
+          </Sticky>
+          <div className='cell auto cell-block-container' ref={ref => { scrollParentRef = ref }}>
+            <div className='grid-x' >
+              <div id='content-view' className='cell auto'>
+                <Switch>
+                  <Route path='/public' exact component={() => <PublicFeed getScrollParent={getScrollParent} />} />
+                  <Route path='/private/' component={Private} />
+                  <Route path='/participating/' component={() => <ParticipatingFeed getScrollParent={getScrollParent} />} />
+                  <Route path='/bySomeoneYouFollow/' component={() => <BySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
+                  <Route path='/repliedToBySomeoneYouFollow/' component={() => <RepliedToBySomeoneYouFollowFeed getScrollParent={getScrollParent} />} />
+                  <Route path='/profile' component={Profile} />
+                  <Route path='/mentions/' component={() => <MentionsFeed getScrollParent={getScrollParent} />} />
+                  <Route path='/post/:id' component={Post} />
+                  <Route path='/author/:id' component={Author} />
+                  <Redirect from='/' to='/bySomeoneYouFollow' />
+                </Switch>
               </div>
             </div>
           </div>
-        </div>
-      </Router>
-    </ApolloProvider>
+        </Router>
+      </ApolloProvider>
+    </StickyContainer>
   )
 }
 

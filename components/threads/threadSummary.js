@@ -9,14 +9,14 @@ class ThreadSummary extends PureComponent {
     const { thread, thread: { replies } } = this.props
     const uniqueReplies = uniqBy((reply) => reply.author.id)(replies)
     return (
-      <div className='grid-x'>
-        <div className='cell small-2'>
+      <div className='grid-x card'>
+        <div className='cell card-section author-card-section'>
           <AuthorThumbnail author={thread.root.author} />
         </div>
-        <div className='cell small-10'>
+        <div className='cell card-section '>
           <Markdown source={thread.root.text} />
         </div >
-        {thread.replies.length > 0 && <div className='grid-x small-8 small-offset-2'>
+        {thread.replies.length > 0 && <div className='grid-x card-divider'>
           <div className='cell small-2'>
             {uniqueReplies.map((reply) => <AuthorThumbnail key={reply.author.id} author={reply.author} />)}
           </div>

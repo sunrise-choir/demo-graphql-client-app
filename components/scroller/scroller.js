@@ -31,15 +31,16 @@ function Scroller (WrappedComponent, itemsKey) {
                   }
                   client.query({ query, variables })
                     .then(({ data }) => {
-                      const { [itemsKey]: { nodes, pageInfo: { endCursor } } } = data
+                      const { [itemsKey]: { edges, pageInfo: { endCursor } } } = data
+
+                      const nodes = edges.map(edge => edge.node)
 
                       this.endCursor = endCursor
                       this.setState((prevState) => ({ [itemsKey]: prevState[itemsKey].concat(nodes) }))
                     })
                 }}
                 hasMore
-                useWindow={false}
-                getScrollParent={this.props.getScrollParent}
+                useWindow
                 loader={<div className='loader' key={0}>Loading ...</div>}
               >
                 <WrappedComponent items={this.state[itemsKey]} />

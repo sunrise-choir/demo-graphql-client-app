@@ -24,24 +24,25 @@ const query = gql`
         endCursor
         hasNextPage
       }
-      nodes {
-        root {
-          id
-          text
-          author {
+      edges {
+        node {
+          root {
             id
-            name
-            imageLink
+            text
+            author {
+              id
+              name
+              imageLink
+            }
           }
-        }
-        replies{
-          id
-          author{
+          replies{
             id
-            name
-            imageLink
+            author{
+              id
+              name
+              imageLink
+            }
           }
-        
         }
       }
     }

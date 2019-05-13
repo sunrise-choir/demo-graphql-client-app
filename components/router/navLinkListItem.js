@@ -1,12 +1,13 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
+import { MenuItem, Button } from 'react-foundation'
 
 export default function NavItem ({ children, to, exact }) {
   return (
     <Route path={to} exact={exact} children={({ match }) => (
-      <li className={match ? 'is-active' : null}>
+      <MenuItem isActive={!!match} >
         <Link to={to}>{children}</Link>
-      </li>
+      </MenuItem>
     )} />
   )
 }
