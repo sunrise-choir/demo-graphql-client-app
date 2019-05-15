@@ -7,18 +7,18 @@ const fallbackImageUrl = 'data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEA
 
 class AuthorThumbnail extends PureComponent {
   render () {
-    const { author } = this.props
+    const { author, isNameDisabled } = this.props
     return (
-      <div className='grid-x grid-margin-x'>
+      <div className='cell auto grid-x grid-margin-x'>
         <div className='cell small-4 medium-2 large-1 '>
           {author.imageLink
-            ? <img className='thumbnail' src={blobLinkToUrl(author.imageLink)} style={{ minHeight: '4rem', minWidth: '4rem' }} />
-            : <img className='thumbnail' src={fallbackImageUrl} style={{ 'backgroundColor': colorHash.hex(author.id), minHeight: '4rem', minWidth: '4rem' }} />
+            ? <img className='thumbnail' src={blobLinkToUrl(author.imageLink)} style={{ minHeight: '4rem', minWidth: '4rem', maxWidth: '4rem' }} />
+            : <img className='thumbnail' src={fallbackImageUrl} style={{ 'backgroundColor': colorHash.hex(author.id), minHeight: '4rem', minWidth: '4rem', maxWidth: '4rem' }} />
           }
         </div>
-        <div className='cell auto author-thumbnail-name'>
+        {!isNameDisabled && <div className='cell auto author-thumbnail-name'>
           {author.name}
-        </div>
+        </div>}
       </div>
     )
   }

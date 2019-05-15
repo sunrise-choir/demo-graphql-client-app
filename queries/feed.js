@@ -36,6 +36,7 @@ const query = gql`
               name
               imageLink
             }
+            likesCount
           }
           replies{
             id

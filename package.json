@@ -69,6 +69,7 @@
     "regex-emoji": "^2.0.7",
     "ssb-markdown": "^4.1.0",
     "ssb-ref": "^2.13.9",
+    "store2": "^2.7.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
     "tinyify": "^2.5.0",
