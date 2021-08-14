@@ -1,5 +1,5 @@
 {
-  "name": "ssb-patchql-client",
+  "name": "demo-graphql-client-app",
   "version": "1.0.0",
   "description": "An example app that has feeds / threads / posts etc.",
   "main": "index.js",
@@ -23,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pietgeursen/ssb-patchql-client"
+    "url": "https://github.com/sunrise-choir/demo-graphql-client-app"
   },
   "author": "pietgeursen",
-  "license": "GPL-3.0",
+  "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/pietgeursen/ssb-patchql-client/issues"
+    "url": "https://github.com/sunrise-choir/demo-graphql-client-app/issues"
   },
-  "homepage": "https://github.com/pietgeursen/ssb-patchql-client",
+  "homepage": "https://github.com/sunrise-choir/demo-graphql-client-app",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.4.3",

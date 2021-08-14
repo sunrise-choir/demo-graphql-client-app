@@ -1,5 +1,5 @@
 
-# ssb-patchql-client
+# demo-graphql-client-app
 
 An example app that has feeds / threads / posts etc.
 
@@ -8,7 +8,7 @@ An example app that has feeds / threads / posts etc.
 ### install
 
 ```
-git clone https://github.com/pietgeursen/ssb-patchql-client
+git clone https://github.com/sunrise-choir/demo-graphql-client-app
 cd 
 npm install
 ```
